@@ -47,6 +47,6 @@ for book, chapter in bible_dict.items():
             np.savetxt(f, np_eng, fmt="%s")
 
         try:
-            r = requests.get(url)
+            html = requests.get(url)
         except requests.exceptions.RequestException as e:
             raise SystemExit(e)
