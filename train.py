@@ -92,7 +92,6 @@ def evaluate(model, iterator, criterion):
 
             output = output[1:].view(-1, output_dim)
             trg = trg[1:].view(-1)
-
             #trg = [(trg len - 1) * batch size]
             #output = [(trg len - 1) * batch size, output dim]
 
