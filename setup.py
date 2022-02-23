@@ -7,7 +7,7 @@ from torchtext.legacy.data import Field, TabularDataset, BucketIterator
 
 SEED = 1234
 np.random.seed(SEED)
-BATCH_SIZE = 220
+BATCH_SIZE = 200
 
 tailo_txt = open('bible.tw', encoding='utf-8').read().split('\n')
 eng_txt = open('bible.en', encoding='utf-8').read().split('\n')
