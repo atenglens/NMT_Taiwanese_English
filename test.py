@@ -13,7 +13,7 @@ criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
 train_data, valid_data, test_data = get_data()
 _, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
-model.load_state_dict(torch.load('seq2seq_6layers.pt'))
+model.load_state_dict(torch.load('translation-model.pt'))
 
 example_idx = 0
 example = train_data.examples[example_idx]
