@@ -7,6 +7,7 @@ from torchtext.legacy.data import Field, TabularDataset, BucketIterator
 
 SEED = 1234
 np.random.seed(SEED)
+BATCH_SIZE = 256
 
 tailo_txt = open('bible.tw', encoding='utf-8').read().split('\n')
 eng_txt = open('bible.en', encoding='utf-8').read().split('\n')
@@ -59,7 +60,7 @@ def get_iterators(train_data, valid_data, test_data):
     trg_en.build_vocab(train_data, min_freq = 2)
     train_iterator, valid_iterator, test_iterator = BucketIterator.splits(
         (train_data, valid_data, test_data),
-        batch_size = 128,
+        batch_size = BATCH_SIZE,
         sort_key=lambda x: len(x.src),
         sort_within_batch=False,
         device = device)

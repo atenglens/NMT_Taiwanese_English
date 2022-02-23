@@ -11,6 +11,7 @@ from training_functions import init_weights, count_parameters, epoch_time
 from build_model import build_model
 
 SEED = 1234
+BATCH_SIZE = 256
 
 random.seed(SEED)
 np.random.seed(SEED)
@@ -41,8 +42,8 @@ def train(model, iterator, optimizer, criterion, clip):
     model.train()
     epoch_loss = 0
 
-    print(len(list(iterator)))
-    for i, batch in tqdm(enumerate(iterator), total=int(math.ceil(len(train_data) / 128))):
+    # len(list(iterator)) = 198
+    for i, batch in tqdm(enumerate(iterator), total=int(math.ceil(len(train_data) / BATCH_SIZE))):
         src = batch.src.to(device)
         trg = batch.trg.to(device)
 
