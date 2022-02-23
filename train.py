@@ -11,7 +11,7 @@ from training_functions import init_weights, count_parameters, epoch_time
 from build_model import build_model
 
 SEED = 1234
-BATCH_SIZE = 256
+BATCH_SIZE = 128
 
 random.seed(SEED)
 np.random.seed(SEED)
