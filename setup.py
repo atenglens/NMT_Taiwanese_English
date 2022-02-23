@@ -26,7 +26,7 @@ test.to_csv('test.csv', index=False)
 spacy_en = spacy.load('en_core_web_sm')
 
 def tokenize_en(text):
-    return [tok.text for tok in spacy_en.tokenizer(text)]
+    return [tok.text.replace(',', '') for tok in spacy_en.tokenizer(text)]
 
 def tokenize_tw(text):
     """
