@@ -42,7 +42,6 @@ preds = [trg_en.vocab.itos[idx] for idx in output_idx]
 bleu = sacrebleu.corpus_bleu(preds, refs)
 print("BLEU: ", bleu.score)
 
-# print('BLEU SCORE: ', bleu_score(predicted_translation, target_translation))
 # test_loss = evaluate(model, test_iterator, criterion)
 #
 # print(f'| Test Loss: {test_loss:.3f} | Test PPL: {math.exp(test_loss):7.3f} |')
