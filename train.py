@@ -103,7 +103,7 @@ def evaluate(model, iterator, criterion):
 
 
 
-N_EPOCHS = 10
+N_EPOCHS = 20
 CLIP = 1
 
 best_valid_loss = float('inf')
