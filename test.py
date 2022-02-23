@@ -1,4 +1,4 @@
-import torch, math
+import torch, math, sacrebleu
 import torch.nn as nn
 from training_functions import evaluate
 from build_model import build_model
@@ -20,6 +20,7 @@ example_idx = randrange(len(train_data.examples))
 example = train_data.examples[example_idx]
 print('SOURCE: ', ' '.join(example.src))
 target_translation = ' '.join(example.trg)
+refs = example.trg
 print('TARGET: ', target_translation)
 
 src_tensor = src_tw.process([example.src]).to(device)
@@ -36,6 +37,11 @@ output_idx = outputs[1:].squeeze(1).argmax(1)
 # itos: A list of token strings indexed by their numerical identifiers.
 predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
 print('TRANSLATION: ', predicted_translation)
+
+preds = [trg_en.vocab.itos[idx] for idx in output_idx]
+bleu = sacrebleu.corpus_bleu(preds, refs)
+print("BLEU: ", bleu.score)
+
 # print('BLEU SCORE: ', bleu_score(predicted_translation, target_translation))
 # test_loss = evaluate(model, test_iterator, criterion)
 #
