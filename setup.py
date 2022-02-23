@@ -36,7 +36,7 @@ def tokenize_tw(text):
 
 def get_fields():
     src_tw = Field(tokenize = tokenize_tw, init_token = '<sos>', eos_token = '<eos>', lower = True)
-    trg_en = Field(init_token = '<sos>', eos_token = '<eos>', lower = True)
+    trg_en = Field(tokenize = tokenize_en, init_token = '<sos>', eos_token = '<eos>', lower = True)
     return src_tw, trg_en
 
 src_tw, trg_en = get_fields()
