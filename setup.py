@@ -7,7 +7,6 @@ from torchtext.legacy.data import Field, TabularDataset, BucketIterator
 
 SEED = 1234
 np.random.seed(SEED)
-BATCH_SIZE = 220
 
 tailo_txt = open('bible.tw', encoding='utf-8').read().split('\n')
 eng_txt = open('bible.en', encoding='utf-8').read().split('\n')
@@ -54,13 +53,13 @@ def get_data(train="train.csv", valid="valid.csv", test="test.csv"):
         fields=fields)
     return train_data, valid_data, test_data
 
-def get_iterators(train_data, valid_data, test_data):
+def get_iterators(train_data, valid_data, test_data, batch_size):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     src_tw.build_vocab(train_data, min_freq = 2)
     trg_en.build_vocab(train_data, min_freq = 2)
     train_iterator, valid_iterator, test_iterator = BucketIterator.splits(
         (train_data, valid_data, test_data),
-        batch_size = BATCH_SIZE,
+        batch_size = batch_size,
         sort_key=lambda x: len(x.src),
         sort_within_batch=False,
         device = device)

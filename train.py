@@ -1,4 +1,4 @@
-import torch, random, math, time
+import torch, random, math, time, sys
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
@@ -11,7 +11,8 @@ from training_functions import init_weights, count_parameters, epoch_time
 from build_model import build_model
 
 SEED = 1234
-BATCH_SIZE = 220
+BATCH_SIZE = sys.argv[1]
+N_EPOCHS = sys.argv[2]
 
 random.seed(SEED)
 np.random.seed(SEED)
@@ -20,7 +21,7 @@ torch.cuda.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
 train_data, valid_data, test_data = get_data()
-train_iterator, valid_iterator, _, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
+train_iterator, valid_iterator, _, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # TRG_PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token]
@@ -102,9 +103,6 @@ def evaluate(model, iterator, criterion):
 
     return epoch_loss / len(iterator)
 
-
-
-N_EPOCHS = 30
 CLIP = 1
 
 best_valid_loss = float('inf')
