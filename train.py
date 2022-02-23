@@ -107,7 +107,7 @@ CLIP = 1
 
 best_valid_loss = float('inf')
 
-for epoch in range(N_EPOCHS=30):
+for epoch in range(N_EPOCHS):
 
     start_time = time.time()
 
