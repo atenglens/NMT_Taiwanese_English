@@ -18,7 +18,7 @@ _, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test
 
 example_idx = randrange(len(train_data.examples))
 example = train_data.examples[example_idx]
-print('SOURCE: ', ' '.join(example.src))
+print('SOURCE: ', ' '.join(example.src[::-1]))
 # target_translation = ' '.join(example.trg)
 # refs = example.trg
 # print('TARGET: ', target_translation)
