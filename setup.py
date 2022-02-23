@@ -1,4 +1,4 @@
-import torch, random, spacy
+import torch, random, spacy, re
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -32,7 +32,10 @@ def tokenize_tw(text):
     """
     Tokenizes Taiwanese text on spaces and returns reversed sequence.
     """
-    return text.replace('-', ' ').split()[::-1]
+    no_hyphens = text.replace('-', ' ')
+    isolate_periods = re.split(r'([.])', no_hyphens)
+    strip = [x.strip() for x in periods]
+    return strip[::-1]
 
 def get_fields():
     src_tw = Field(tokenize = tokenize_tw, init_token = '<sos>', eos_token = '<eos>', lower = True)
