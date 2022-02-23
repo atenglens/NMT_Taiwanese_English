@@ -21,7 +21,7 @@ torch.cuda.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
 train_data, valid_data, test_data = get_data()
-train_iterator, valid_iterator, _, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE)
+train_iterator, valid_iterator, _, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE=128)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # TRG_PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token]
@@ -107,7 +107,7 @@ CLIP = 1
 
 best_valid_loss = float('inf')
 
-for epoch in range(N_EPOCHS):
+for epoch in range(N_EPOCHS=30):
 
     start_time = time.time()
 
@@ -120,7 +120,7 @@ for epoch in range(N_EPOCHS):
 
     if valid_loss < best_valid_loss:
         best_valid_loss = valid_loss
-        torch.save(model.state_dict(), f'seq2seq_6model_epoch{epoch}.pt')
+        torch.save(model.state_dict(), f'seq2seq_6model_epoch{epoch+1}.pt')
 
     print(f'Epoch: {epoch+1:02d} | Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f}')
