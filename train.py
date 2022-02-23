@@ -11,7 +11,7 @@ from training_functions import init_weights, count_parameters, epoch_time
 from build_model import build_model
 
 SEED = 1234
-BATCH_SIZE = 200
+BATCH_SIZE = 220
 
 random.seed(SEED)
 np.random.seed(SEED)
@@ -104,7 +104,7 @@ def evaluate(model, iterator, criterion):
 
 
 
-N_EPOCHS = 20
+N_EPOCHS = 30
 CLIP = 1
 
 best_valid_loss = float('inf')
