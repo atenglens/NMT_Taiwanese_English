@@ -12,19 +12,19 @@ np.random.seed(SEED)
 
 # tailo_txt = open('bible.tw', encoding='utf-8').read().split('\n')
 # eng_txt = open('bible.en', encoding='utf-8').read().split('\n')
-
-
-raw_data = {'Tailo': [line for line in tailo_txt],
-            'English': [line for line in eng_txt]}
-
-df = pd.DataFrame(raw_data, columns=['Tailo', 'English'])
-
-train, test = train_test_split(df, test_size=0.2)
-valid, test = train_test_split(test, test_size=0.5)
-
-train.to_csv('train.csv', index=False)
-valid.to_csv('valid.csv', index=False)
-test.to_csv('test.csv', index=False)
+#
+#
+# raw_data = {'Tailo': [line for line in tailo_txt],
+#             'English': [line for line in eng_txt]}
+#
+# df = pd.DataFrame(raw_data, columns=['Tailo', 'English'])
+#
+# train, test = train_test_split(df, test_size=0.2)
+# valid, test = train_test_split(test, test_size=0.5)
+#
+# train.to_csv('train.csv', index=False)
+# valid.to_csv('valid.csv', index=False)
+# test.to_csv('test.csv', index=False)
 
 spacy_en = spacy.load('en_core_web_sm')
 spacy_de = spacy.load('de_core_news_sm')
