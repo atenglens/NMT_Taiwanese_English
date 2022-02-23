@@ -33,7 +33,7 @@ def tokenize_tw(text):
     """
     Tokenizes Taiwanese text on spaces and returns reversed sequence.
     """
-    return text.split()[::-1]
+    return text.replace('-', ' ').split()[::-1]
 
 def get_fields():
     src_tw = Field(tokenize = tokenize_tw, init_token = '<sos>', eos_token = '<eos>', lower = True)

@@ -122,7 +122,7 @@ for epoch in range(N_EPOCHS):
 
     if valid_loss < best_valid_loss:
         best_valid_loss = valid_loss
-        torch.save(model.state_dict(), 'translation-model.pt')
+        torch.save(model.state_dict(), f'seq2seq_6model_epoch{epoch}.pt')
 
     print(f'Epoch: {epoch+1:02d} | Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f}')
