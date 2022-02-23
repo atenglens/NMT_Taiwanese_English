@@ -11,8 +11,8 @@ from training_functions import init_weights, count_parameters, epoch_time
 from build_model import build_model
 
 SEED = 1234
-BATCH_SIZE = sys.argv[1]
-N_EPOCHS = sys.argv[2]
+BATCH_SIZE = int(sys.argv[1])
+N_EPOCHS = int(sys.argv[2])
 
 random.seed(SEED)
 np.random.seed(SEED)
