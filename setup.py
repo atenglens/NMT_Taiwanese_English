@@ -53,7 +53,7 @@ def get_data(train="train.csv", valid="valid.csv", test="test.csv"):
         fields=fields)
     return train_data, valid_data, test_data
 
-def get_iterators(train_data, valid_data, test_data, batch_size):
+def get_iterators(train_data, valid_data, test_data, batch_size=128):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     src_tw.build_vocab(train_data, min_freq = 2)
     trg_en.build_vocab(train_data, min_freq = 2)

@@ -21,7 +21,7 @@ torch.cuda.manual_seed(SEED)
 torch.backends.cudnn.deterministic = True
 
 train_data, valid_data, test_data = get_data()
-train_iterator, valid_iterator, _, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE=128)
+train_iterator, valid_iterator, _, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 # TRG_PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token]

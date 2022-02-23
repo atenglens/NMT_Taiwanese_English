@@ -12,7 +12,7 @@ TRG_PAD_IDX = 1
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
 train_data, valid_data, test_data = get_data()
-_, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE=128)
+_, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
 model.load_state_dict(torch.load('translation-model.pt'))
 
