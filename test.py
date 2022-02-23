@@ -13,8 +13,8 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
 train_data, valid_data, test_data = get_data()
 _, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
-model = build_model(len(src_tw.vocab), len(trg_en.vocab))
-model.load_state_dict(torch.load('seq2seq_6model_epoch31.pt'))
+# model = build_model(len(src_tw.vocab), len(trg_en.vocab))
+# model.load_state_dict(torch.load('seq2seq_6model_epoch31.pt'))
 
 example_idx = randrange(len(train_data.examples))
 example = train_data.examples[example_idx]
