@@ -29,7 +29,6 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Unique tokens in source (tw) vocabulary: {len(src_tw.vocab)}")
 print(f"Unique tokens in target (en) vocabulary: {len(trg_en.vocab)}")
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
-model.load_state_dict(torch.load('seq2seq_6model_epoch31.pt'))
 print(f'The model has {count_parameters(model):,} trainable parameters')
 
 
@@ -121,8 +120,8 @@ for epoch in range(N_EPOCHS):
 
     if valid_loss < best_valid_loss:
         best_valid_loss = valid_loss
-        torch.save(model.state_dict(), f'seq2seq_6model_epoch{epoch+31}.pt')
+        torch.save(model.state_dict(), f'seq2seq_6model_epoch{epoch+1}.pt')
 
-    print(f'Epoch: {epoch+31:02d} | Time: {epoch_mins}m {epoch_secs}s')
+    print(f'Epoch: {epoch+1:02d} | Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f}')
     print(f'\t Val. Loss: {valid_loss:.3f}')
