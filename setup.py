@@ -24,6 +24,8 @@ valid.to_csv('valid.csv', index=False)
 test.to_csv('test.csv', index=False)
 
 spacy_en = spacy.load('en_core_web_sm')
+# filler
+#spacy_zh = spacy.load('zh_core_web_lg')
 
 def tokenize_en(text):
     return [tok.text for tok in spacy_en.tokenizer(text)]
