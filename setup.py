@@ -55,11 +55,14 @@ def tokenize_tw(text):
 def get_fields():
     src_tw = Field(tokenize = tokenize_tw, init_token = '<sos>', eos_token = '<eos>', lower = True)
     trg_en = Field(tokenize = tokenize_en, init_token = '<sos>', eos_token = '<eos>', lower = True)
-    return src_tw, trg_en
+    src_orig = Field(init_token = '<sos>', eos_token = '<eos>', lower = True)
+    trg_orig = Field(init_token = '<sos>', eos_token = '<eos>', lower = True)
+    return src_tw, trg_en, src_orig, trg_orig
 
-src_tw, trg_en = get_fields()
+src_tw, trg_en, src_orig, trg_orig = get_fields()
 
 fields = {'Tailo': ('src', src_tw), 'English': ('trg', trg_en)}
+orig_fields =  {'Tailo': ('src_orig', src_orig), 'English': ('trg_orig', trg_orig)}
 
 def get_data(train="train.csv", valid="valid.csv", test="test.csv"):
     train_data, valid_data, test_data = TabularDataset.splits(
@@ -69,6 +72,16 @@ def get_data(train="train.csv", valid="valid.csv", test="test.csv"):
         test='test.csv',
         format='csv',
         fields=fields)
+    return train_data, valid_data, test_data
+
+def get_orig_data(train="train.csv", valid="valid.csv", test="test.csv"):
+    train_data, valid_data, test_data = TabularDataset.splits(
+        path='',
+        train='train.csv',
+        validation='valid.csv',
+        test='test.csv',
+        format='csv',
+        fields=orig_fields)
     return train_data, valid_data, test_data
 
 def get_iterators(train_data, valid_data, test_data, batch_size=128):

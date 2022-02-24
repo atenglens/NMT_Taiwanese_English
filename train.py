@@ -7,7 +7,7 @@ import pandas as pd
 from tqdm import tqdm
 from setup import get_data, get_iterators
 from seq2seq import Encoder, Decoder, Seq2Seq
-from training_functions import init_weights, count_parameters, epoch_time
+from training_functions import count_parameters, epoch_time
 from build_model import build_model
 
 SEED = 1234
