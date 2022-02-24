@@ -14,14 +14,15 @@ criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
 train_data, valid_data, test_data = get_data()
 _, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
-model.load_state_dict(torch.load('seq2seq_6model_epoch30.pt'))
+#model.load_state_dict(torch.load('seq2seq_6model_epoch30.pt'))
 
 example_idx = randrange(len(train_data.examples))
 example = train_data.examples[example_idx]
-print('SOURCE: ', ' '.join(example.src[::-1]))
-target_translation = ' '.join(example.trg)
+preprocessed_source = ' '.join(example.src[::-1])
+print('SOURCE: ', preprocessed_source)
+preprocessed_target = ' '.join(example.trg)
 refs = example.trg
-print('TARGET: ', target_translation)
+print('TARGET: ', preprocessed_target)
 
 src_tensor = src_tw.process([example.src]).to(device)
 trg_tensor = trg_en.process([example.trg]).to(device)
@@ -41,8 +42,8 @@ print('TRANSLATION: ', predicted_translation)
 preds = [trg_en.vocab.itos[idx] for idx in output_idx]
 # preds = ['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']
 # refs = [['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']]
-bleu = sacrebleu.corpus_bleu(preds, refs)
-print("BLEU: ", bleu.score)
+# bleu = sacrebleu.corpus_bleu(preds, refs)
+# print("BLEU: ", bleu.score)
 
 # test_loss = evaluate(model, test_iterator, criterion)
 #
