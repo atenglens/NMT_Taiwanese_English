@@ -11,8 +11,8 @@ np.random.seed(SEED)
 tailo_txt = open('bible.tw', encoding='utf-8').read().split('\n')
 eng_txt = open('bible.en', encoding='utf-8').read().split('\n')
 
-raw_data = {'Tailo': [line for line in tailo_txt],
-            'English': [line for line in eng_txt]}
+raw_data = {'Tailo': [line for line in tailo_txt[:10]],
+            'English': [line for line in eng_txt][:10]}
 
 df = pd.DataFrame(raw_data, columns=['Tailo', 'English'])
 
