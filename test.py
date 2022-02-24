@@ -30,20 +30,20 @@ preprocessed_target = ' '.join(example.trg)
 refs = example.trg
 print('TARGET: ', preprocessed_target)
 
-src_tensor = src_tw.process([example.src]).to(device)
-trg_tensor = trg_en.process([example.trg]).to(device)
-# print(trg_tensor.shape)
-
-model.eval()
-with torch.no_grad():
-    outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
-
-# print(outputs.shape)
-
-output_idx = outputs[1:].squeeze(1).argmax(1)
-# itos: A list of token strings indexed by their numerical identifiers.
-predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
-print('TRANSLATION: ', predicted_translation)
+# src_tensor = src_tw.process([example.src]).to(device)
+# trg_tensor = trg_en.process([example.trg]).to(device)
+# # print(trg_tensor.shape)
+#
+# model.eval()
+# with torch.no_grad():
+#     outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
+#
+# # print(outputs.shape)
+#
+# output_idx = outputs[1:].squeeze(1).argmax(1)
+# # itos: A list of token strings indexed by their numerical identifiers.
+# predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
+# print('TRANSLATION: ', predicted_translation)
 
 # preds = [trg_en.vocab.itos[idx] for idx in output_idx]
 # preds = ['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']
