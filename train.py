@@ -35,7 +35,6 @@ print(f'The model has {count_parameters(model):,} trainable parameters')
 
 
 optimizer = optim.Adam(model.parameters(), lr=1e-4, eps=1e-3)
-print(model.parameters())
 
 TRG_PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token]
 criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
