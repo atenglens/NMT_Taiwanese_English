@@ -36,27 +36,27 @@ spacy_en = spacy.load('en_core_web_sm')
 def tokenize_en(text):
     return [tok.text for tok in spacy_en.tokenizer(text)]
 
-def tokenize_tw(text):
-    """
-    Tokenizes Taiwanese text on spaces and returns reversed sequence.
-    """
-    specialChars = "—[]\"\'()"
-    for specialChar in specialChars:
-        text = text.replace(specialChar, '')
-    no_hyphens = text.replace('-', ' ')
-    isolate_periods = re.split(r'([.,])', no_hyphens)
-    strip = [x.strip() for x in isolate_periods]
-    return strip[::-1]
-
 # def tokenize_tw(text):
 #     """
 #     Tokenizes Taiwanese text on spaces and returns reversed sequence.
 #     """
-#     specialChars = "—.,:;?![]\"\'()"
+#     specialChars = "—[]\"\'()"
 #     for specialChar in specialChars:
 #         text = text.replace(specialChar, '')
-#     text = text.replace('-', ' ')
-#     return text.split()[::-1]
+#     no_hyphens = text.replace('-', ' ')
+#     isolate_periods = re.split(r'([.,])', no_hyphens)
+#     strip = [x.strip() for x in isolate_periods]
+#     return strip[::-1]
+
+def tokenize_tw(text):
+    """
+    Tokenizes Taiwanese text on spaces and returns reversed sequence.
+    """
+    # specialChars = "—.,:;?![]\"\'()"
+    # for specialChar in specialChars:
+    #     text = text.replace(specialChar, '')
+    text = text.replace('-', ' ')
+    return text.split()[::-1]
 
 def get_fields():
     src_tw = Field(tokenize = tokenize_tw, init_token = '<sos>', eos_token = '<eos>', lower = True)
