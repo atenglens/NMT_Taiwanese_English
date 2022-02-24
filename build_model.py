@@ -9,8 +9,8 @@ def build_model(input_dim, output_dim):
     ENC_EMB_DIM = 256
     DEC_EMB_DIM = 256
     HID_DIM = 512
-    N_LAYERS = 6
-    ENC_DROPOUT = 0.8
+    N_LAYERS = 4
+    ENC_DROPOUT = 0.5
     DEC_DROPOUT = 0.5
 
     enc = Encoder(INPUT_DIM, ENC_EMB_DIM, HID_DIM, N_LAYERS, ENC_DROPOUT)
