@@ -13,9 +13,9 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
 train_data, valid_data, test_data = get_data()
 og_train_data, og_valid_data, og_test_data = get_orig_data()
-# _, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
+_, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
-model.load_state_dict(torch.load('seq2seq_6model_epoch30.pt'))
+# model.load_state_dict(torch.load('seq2seq_6model_epoch30.pt'))
 
 example_idx = randrange(len(og_train_data.examples))
 example = train_data.examples[example_idx]
@@ -46,11 +46,11 @@ predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
 print('TRANSLATION: ', predicted_translation)
 
 # preds = [trg_en.vocab.itos[idx] for idx in output_idx]
-# # preds = ['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']
-# # refs = [['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']]
-# # bleu = sacrebleu.corpus_bleu(preds, refs)
-# # print("BLEU: ", bleu.score)
+# preds = ['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']
+# refs = [['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']]
+# bleu = sacrebleu.corpus_bleu(preds, refs)
+# print("BLEU: ", bleu.score)
+
+# test_loss = evaluate(model, test_iterator, criterion)
 #
-# # test_loss = evaluate(model, test_iterator, criterion)
-# #
-# # print(f'Test Loss: {test_loss:.3f}')
+# print(f'Test Loss: {test_loss:.3f}')
