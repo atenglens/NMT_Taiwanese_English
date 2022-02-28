@@ -120,9 +120,10 @@ for epoch in range(N_EPOCHS):
 
     epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
-    if valid_loss < best_valid_loss:
-        best_valid_loss = valid_loss
-        torch.save(model.state_dict(), f'seq2seq_model_epoch{epoch+1}.pt')
+    torch.save(model.state_dict(), f'seq2seq_model_epoch{epoch+1}.pt')
+    # if valid_loss < best_valid_loss:
+    #     best_valid_loss = valid_loss
+    #     torch.save(model.state_dict(), f'seq2seq_model_epoch{epoch+1}.pt')
 
     print(f'Epoch: {epoch+1:02d} | Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f}')
