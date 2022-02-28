@@ -108,6 +108,7 @@ def evaluate(model, iterator, criterion):
 CLIP = 1
 
 best_valid_loss = float('inf')
+best_train_loss = float('inf')
 
 for epoch in range(N_EPOCHS):
 
@@ -120,7 +121,9 @@ for epoch in range(N_EPOCHS):
 
     epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
-    torch.save(model.state_dict(), f'seq2seq_model_epoch{epoch+1}.pt')
+    if train_loss < best_train_loss:
+        best_train_loss = train_loss
+        torch.save(model.state_dict(), f'seq2seq_model_epoch{epoch+1}.pt')
     # if valid_loss < best_valid_loss:
     #     best_valid_loss = valid_loss
     #     torch.save(model.state_dict(), f'seq2seq_model_epoch{epoch+1}.pt')
