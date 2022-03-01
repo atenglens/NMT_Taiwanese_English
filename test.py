@@ -15,7 +15,7 @@ train_data, valid_data, test_data = get_data()
 og_train_data, og_valid_data, og_test_data = get_orig_data()
 _, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
-# model.load_state_dict(torch.load('seq2seq_6model_epoch30.pt'))
+# model.load_state_dict(torch.load('seq2seq_model_epoch30.pt'))
 
 example_idx = randrange(len(og_train_data.examples))
 example = train_data.examples[example_idx]
