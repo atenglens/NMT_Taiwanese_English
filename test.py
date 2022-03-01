@@ -8,13 +8,16 @@ from random import randrange
 
 input_dim = 28
 output_dim = 37
-TRG_PAD_IDX = 1
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
 train_data, valid_data, test_data = get_data()
 og_train_data, og_valid_data, og_test_data = get_orig_data()
 _, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data)
+PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token] # ignore padding index when calculating loss
+criterion = nn.CrossEntropyLoss(ignore_index = PAD_IDX)
+
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
+
+# start training from checkpoint
 # model.load_state_dict(torch.load('seq2seq_model_epoch30.pt'))
 
 example_idx = randrange(len(og_train_data.examples))
@@ -25,10 +28,10 @@ print('ORIG SOURCE: ', orig_source)
 orig_target = ' '.join(og_example.trg_orig)
 print('ORIG TARGET: ', orig_target)
 preprocessed_source = ' '.join(example.src[::-1])
-print('SOURCE: ', preprocessed_source)
+print('TOKENIZED SOURCE: ', preprocessed_source)
 preprocessed_target = ' '.join(example.trg)
 refs = example.trg
-print('TARGET: ', preprocessed_target)
+print('TOKENIZED TARGET: ', preprocessed_target)
 
 src_tensor = src_tw.process([example.src]).to(device)
 trg_tensor = trg_en.process([example.trg]).to(device)
@@ -47,10 +50,11 @@ print('TRANSLATION: ', predicted_translation)
 
 # preds = [trg_en.vocab.itos[idx] for idx in output_idx]
 # preds = ['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']
-# refs = [['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']]
+# refs = [['i', 'seek', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']]
 # bleu = sacrebleu.corpus_bleu(preds, refs)
 # print("BLEU: ", bleu.score)
 
+# do not evaluate on test set until end of project
 # test_loss = evaluate(model, test_iterator, criterion)
 #
 # print(f'Test Loss: {test_loss:.3f}')

@@ -25,8 +25,6 @@ train_data, valid_data, test_data = get_data()
 train_iterator, valid_iterator, _, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-# TRG_PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token]
-# print(TRG_PAD_IDX)
 print(f"Unique tokens in source (tw) vocabulary: {len(src_tw.vocab)}")
 print(f"Unique tokens in target (en) vocabulary: {len(trg_en.vocab)}")
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
@@ -37,8 +35,8 @@ print(f'The model has {count_parameters(model):,} trainable parameters')
 # lr=1e-4, eps=1e-3
 optimizer = optim.Adam(model.parameters())
 
-TRG_PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token]
-criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
+PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token] # ignore padding index when calculating loss
+criterion = nn.CrossEntropyLoss(ignore_index = PAD_IDX)
 
 
 def train(model, iterator, optimizer, criterion, clip):
@@ -52,22 +50,14 @@ def train(model, iterator, optimizer, criterion, clip):
         trg = batch.trg.to(device)
 
         optimizer.zero_grad()
-
         output = model(src, trg)
-
-        #trg = [trg len, batch size]
-        #output = [trg len, batch size, output dim]
 
         output_dim = output.shape[-1]
 
         output = output[1:].view(-1, output_dim)
         trg = trg[1:].view(-1)
 
-        #trg = [(trg len - 1) * batch size]
-        #output = [(trg len - 1) * batch size, output dim]
-
         loss = criterion(output, trg)
-
         loss.backward()
 
         torch.nn.utils.clip_grad_norm_(model.parameters(), clip)
@@ -88,20 +78,13 @@ def evaluate(model, iterator, criterion):
             src = batch.src.to(device)
             trg = batch.trg.to(device)
 
-            output = model(src, trg, 0) #turn off teacher forcing
-
-            #trg = [trg len, batch size]
-            #output = [trg len, batch size, output dim]
-
+            output = model(src, trg, 0) # turn off teacher forcing
             output_dim = output.shape[-1]
 
             output = output[1:].view(-1, output_dim)
             trg = trg[1:].view(-1)
-            #trg = [(trg len - 1) * batch size]
-            #output = [(trg len - 1) * batch size, output dim]
 
             loss = criterion(output, trg)
-
             epoch_loss += loss.item()
 
     return epoch_loss / len(iterator)
