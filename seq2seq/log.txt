@@ -1,0 +1,36 @@
+2 layers, batch size = 128
+
+Unique tokens in (tw): 4923
+Unique tokens in (en): 7938
+The model has 14,721,026 trainable parameters
+
+
+Epoch: 01 | Time: 1m 13s
+ Train Loss: 5.701
+  Val. Loss: 5.794
+...
+Epoch: 108 | Time: 1m 13s
+Train Loss: 2.160
+ Val. Loss: 7.421
+Epoch: 109 | Time: 1m 12s
+Train Loss: 2.122
+ Val. Loss: 7.450
+Epoch: 110 | Time: 1m 12s
+Train Loss: 2.055
+ Val. Loss: 7.494
+Epoch: 111 | Time: 1m 12s
+Train Loss: 2.071
+ Val. Loss: 7.646
+Epoch: 112 | Time: 1m 12s
+Train Loss: 2.091
+ Val. Loss: 7.557
+Epoch: 113 | Time: 1m 12s
+Train Loss: 2.064
+ Val. Loss: 7.530
+Epoch: 114 | Time: 1m 12s
+Train Loss: 2.080
+ Val. Loss: 7.616
+...
+Epoch: 131 | Time: 1m 13s
+Train Loss: 1.774
+ Val. Loss: 7.892
