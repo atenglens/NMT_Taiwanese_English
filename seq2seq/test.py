@@ -17,7 +17,6 @@ criterion = nn.CrossEntropyLoss(ignore_index = PAD_IDX)
 
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
 
-# start training from checkpoint
 # model.load_state_dict(torch.load('seq2seq_model_epoch30.pt'))
 
 example_idx = randrange(len(og_valid_data.examples))
