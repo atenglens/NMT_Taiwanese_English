@@ -20,9 +20,9 @@ model = build_model(len(src_tw.vocab), len(trg_en.vocab))
 # start training from checkpoint
 # model.load_state_dict(torch.load('seq2seq_model_epoch30.pt'))
 
-example_idx = randrange(len(og_train_data.examples))
-example = train_data.examples[example_idx]
-og_example = og_train_data.examples[example_idx]
+example_idx = randrange(len(og_valid_data.examples))
+example = valid_data.examples[example_idx]
+og_example = og_valid_data.examples[example_idx]
 orig_source = ' '.join(og_example.src_orig)
 print('ORIG SOURCE: ', orig_source)
 orig_target = ' '.join(og_example.trg_orig)
