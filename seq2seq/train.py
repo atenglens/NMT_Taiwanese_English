@@ -35,7 +35,7 @@ model = build_model(len(src_tw.vocab), len(trg_en.vocab))
 print(f'The model has {count_parameters(model):,} trainable parameters')
 
 # lr=1e-4, eps=1e-3
-optimizer = optim.Adam(model.parameters())
+optimizer = optim.Adam(model.parameters(), lr=1e-4)
 
 PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token] # ignore padding index when calculating loss
 criterion = nn.CrossEntropyLoss(ignore_index = PAD_IDX)
