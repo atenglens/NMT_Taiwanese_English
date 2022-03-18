@@ -110,9 +110,9 @@ for epoch in range(N_EPOCHS):
     if train_loss < best_train_loss:
         best_train_loss = train_loss
         torch.save(model.state_dict(), f'seq2seq_model_epoch{epoch+1+CURRENT_EPOCH}.pt')
-    # if valid_loss < best_valid_loss:
-    #     best_valid_loss = valid_loss
-    #     torch.save(model.state_dict(), f'seq2seq_model_epoch{epoch+1}.pt')
+    if valid_loss < best_valid_loss:
+        best_valid_loss = valid_loss
+        torch.save(model.state_dict(), f'min_valid_epoch{epoch+1}.pt')
 
     print(f'Epoch: {epoch+1+CURRENT_EPOCH:02d} | Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f}')
