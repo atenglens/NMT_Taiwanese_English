@@ -6,12 +6,12 @@ from training_functions import init_weights
 def build_model(input_dim, output_dim):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     INPUT_DIM, OUTPUT_DIM = input_dim, output_dim
-    ENC_EMB_DIM = 512 # 256
-    DEC_EMB_DIM = 512 # 256
+    ENC_EMB_DIM = 256
+    DEC_EMB_DIM = 256
     HID_DIM = 512
     N_LAYERS = 2
-    ENC_DROPOUT = 0.1
-    DEC_DROPOUT = 0.1
+    ENC_DROPOUT = 0.2
+    DEC_DROPOUT = 0.2
 
     enc = Encoder(INPUT_DIM, ENC_EMB_DIM, HID_DIM, N_LAYERS, ENC_DROPOUT)
     dec = Decoder(OUTPUT_DIM, DEC_EMB_DIM, HID_DIM, N_LAYERS, DEC_DROPOUT)
