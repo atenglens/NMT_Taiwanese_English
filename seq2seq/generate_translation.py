@@ -31,6 +31,9 @@ print('TOKENIZED SOURCE: ', preprocessed_source)
 preprocessed_target = ' '.join(example.trg)
 refs = example.trg
 print('TOKENIZED TARGET: ', preprocessed_target)
+# for i in range(len(og_valid_data.examples)):
+#     example = valid_data.examples[i]
+#     og_example = og_valid_data.examples[i]
 
 src_tensor = src_tw.process([example.src]).to(device)
 trg_tensor = trg_en.process([example.trg]).to(device)
