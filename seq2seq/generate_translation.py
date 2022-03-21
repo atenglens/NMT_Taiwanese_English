@@ -41,7 +41,7 @@ with torch.no_grad():
     outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
 
 output_idx = outputs[1:].squeeze(1).argmax(1)
-itos: A list of token strings indexed by their numerical identifiers.
+# itos: A list of token strings indexed by their numerical identifiers.
 predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
 print('TRANSLATION: ', predicted_translation)
 
