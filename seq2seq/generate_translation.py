@@ -45,12 +45,6 @@ itos: A list of token strings indexed by their numerical identifiers.
 predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
 print('TRANSLATION: ', predicted_translation)
 
-# preds = [trg_en.vocab.itos[idx] for idx in output_idx]
-# preds = ['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']
-# refs = [['i', 'seek', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']]
-# bleu = sacrebleu.corpus_bleu(preds, refs)
-# print("BLEU: ", bleu.score)
-
 # do not evaluate on test set until end of project
 # test_loss = evaluate(model, test_iterator, criterion)
 #
