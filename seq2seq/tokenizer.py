@@ -12,7 +12,7 @@ spacy_en = spacy.load('en_core_web_sm')
 #     return text.split()
 
 def tokenize_en(text):
-    specialChars = ":;?![]\"()"
+    specialChars = ",:;?![]\"()"
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
     return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
@@ -26,7 +26,7 @@ def tokenize_tw(text):
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
     # text = text.replace('-', ' ')
-    isolate_punc = re.split(r'([.,])', text)
+    isolate_punc = re.split(r'([.])', text)
     strip = [x.lower().strip() for x in isolate_punc]
     return strip[::-1]
 
