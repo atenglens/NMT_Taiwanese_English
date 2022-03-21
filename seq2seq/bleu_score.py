@@ -13,7 +13,7 @@ with open("target_translation.txt") as test:
         line = md.detokenize(line)
         refs.append(line)
 
-print("TARGET: ", refs[0])
+# print("TARGET: ", refs[0])
 
 refs = [refs]  # Yes, it is a list of list(s) as required by sacreBLEU
 
@@ -27,7 +27,7 @@ with open("predicted_translation.txt") as pred:
         line = md.detokenize(line)
         preds.append(line)
 
-print("PREDICTED: ", preds[0])
+# print("PREDICTED: ", preds[0])
 
 
 # Calculate and print the BLEU score
