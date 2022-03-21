@@ -3,9 +3,6 @@ from torchtext.data.metrics import bleu_score
 from tokenizer import tokenize_tw
 
 def translate_sentence(model, sentence, src_tw, trg_en, device, max_length=100):
-    # Load src_tw tokenizer
-    spacy_ger = spacy.load("de")
-
     tokens = tokenize_tw(sentence)
     # Create tokens using spacy and everything in lower case (which is what our vocab is)
     # if type(sentence) == str:
