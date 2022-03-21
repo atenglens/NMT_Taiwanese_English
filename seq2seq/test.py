@@ -77,7 +77,7 @@ def translate_sentence(model, sentence, src_tw, trg_en, device, max_length=100):
     translated_sentence = [trg_en.vocab.itos[idx] for idx in outputs]
 
     # remove start token
-    return translated_sentence[1:]
+    return ' '.join(translated_sentence[1:])
 
 sentence = ("I ê tshàn-lān tshin-tshiūnn kng; tuì I ê tshiú ū tshut kng-suàⁿ, tī hia I ê lîng-li̍k khǹg-leh.")
 predicted_translation = translate_sentence(model, sentence, src_tw, trg_en, device)
