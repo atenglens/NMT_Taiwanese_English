@@ -4,6 +4,7 @@ from training_functions import evaluate
 from build_model import build_model
 from tokenizer import get_data, get_orig_data, get_iterators
 from random import randrange
+from tokenizer import tokenize_tw
 # from utils import translate_sentence
 
 BATCH_SIZE = int(sys.argv[1])
