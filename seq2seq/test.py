@@ -4,7 +4,7 @@ from training_functions import evaluate
 from build_model import build_model
 from tokenizer import get_data, get_orig_data, get_iterators
 from random import randrange
-from utils import translate_sentence
+# from utils import translate_sentence
 
 BATCH_SIZE = int(sys.argv[1])
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -38,6 +38,46 @@ print('TOKENIZED TARGET: ', preprocessed_target)
 # model.eval()
 # with torch.no_grad():
 #     outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
+def translate_sentence(model, sentence, src_tw, trg_en, device, max_length=100):
+    tokens = tokenize_tw(sentence)
+
+    # print(tokens)
+
+    # sys.exit()
+    # Add <SOS> and <EOS> in beginning and end respectively
+    tokens.insert(0, src_tw.init_token)
+    tokens.append(src_tw.eos_token)
+
+    # Go through each src_tw token and convert to an index
+    text_to_indices = [src_tw.vocab.stoi[token] for token in tokens]
+
+    # Convert to Tensor
+    sentence_tensor = torch.LongTensor(text_to_indices).unsqueeze(1).to(device)
+
+    # Build encoder hidden, cell state
+    with torch.no_grad():
+        hidden, cell = model.encoder(sentence_tensor)
+
+    outputs = [trg_en.vocab.stoi["<sos>"]]
+
+    for _ in range(max_length):
+        previous_word = torch.LongTensor([outputs[-1]]).to(device)
+
+        with torch.no_grad():
+            output, hidden, cell = model.decoder(previous_word, hidden, cell)
+            best_guess = output.argmax(1).item()
+
+        outputs.append(best_guess)
+
+        # Model predicts it's the end of the sentence
+        if output.argmax(1).item() == trg_en.vocab.stoi["<eos>"]:
+            break
+
+    translated_sentence = [trg_en.vocab.itos[idx] for idx in outputs]
+
+    # remove start token
+    return translated_sentence[1:]
+
 sentence = ("I ê tshàn-lān tshin-tshiūnn kng; tuì I ê tshiú ū tshut kng-suàⁿ, tī hia I ê lîng-li̍k khǹg-leh.")
 predicted_translation = translate_sentence(model, sentence, src_tw, trg_en, device)
 
