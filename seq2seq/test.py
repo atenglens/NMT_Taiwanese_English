@@ -7,7 +7,6 @@ from random import randrange
 from tokenizer import tokenize_tw
 # from utils import translate_sentence
 
-BATCH_SIZE = int(sys.argv[1])
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_data, valid_data, test_data = get_data()
 og_train_data, og_valid_data, og_test_data = get_orig_data()
