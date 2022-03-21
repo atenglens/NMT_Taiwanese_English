@@ -42,9 +42,9 @@ encoder_net = Encoder(
 
 decoder_net = Decoder(
     input_size_decoder,
+    output_size,
     decoder_embedding_size,
     hidden_size,
-    output_size,
     num_layers,
     dec_dropout,
 ).to(device)
