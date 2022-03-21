@@ -13,7 +13,6 @@ from build_model import build_model
 SEED = 1234
 BATCH_SIZE = int(sys.argv[1])
 N_EPOCHS = int(sys.argv[2])
-WITH_ATTENTION = int(sys.argv[3])
 CURRENT_EPOCH = 0
 
 random.seed(SEED)
