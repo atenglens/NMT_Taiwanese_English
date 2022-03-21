@@ -9,10 +9,6 @@ from tokenizer import tokenize_tw
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_data, valid_data, test_data = get_data()
-og_train_data, og_valid_data, og_test_data = get_orig_data()
-_, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE)
-PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token] # ignore padding index when calculating loss
-criterion = nn.CrossEntropyLoss(ignore_index = PAD_IDX)
 
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
 
