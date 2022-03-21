@@ -1,5 +1,5 @@
 .DS_Store
 __pycache__/
 .ipynb_checkpoints/
-./seq2seq/data_preprocessing/pretrain_chinese/data/
+/seq2seq/data_preprocessing/pretrain_chinese/data/
 *.pt
