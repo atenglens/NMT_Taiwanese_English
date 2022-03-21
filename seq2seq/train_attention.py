@@ -20,7 +20,7 @@ BATCH_SIZE = int(sys.argv[1])
 N_EPOCHS = int(sys.argv[2])
 
 train_data, valid_data, test_data = get_data()
-train_iterator, valid_iterator, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, batch_size)
+train_iterator, valid_iterator, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE)
 
 print(f"Unique tokens in source (tw) vocabulary: {len(src_tw.vocab)}")
 print(f"Unique tokens in target (en) vocabulary: {len(trg_en.vocab)}")
