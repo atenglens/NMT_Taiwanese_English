@@ -42,8 +42,13 @@ with torch.no_grad():
 
 output_idx = outputs[1:].squeeze(1).argmax(1)
 # itos: A list of token strings indexed by their numerical identifiers.
-predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
-print('TRANSLATION: ', predicted_translation)
+generation = [trg_en.vocab.itos[idx] for idx in output_idx]
+predicted_translation = []
+for word in generation:
+    if word == '<eos>': break
+    predicted_translation.append(word)
+# predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
+print('TRANSLATION: ', ' '.join(predicted_translation))
 
 # do not evaluate on test set until end of project
 # test_loss = evaluate(model, test_iterator, criterion)
