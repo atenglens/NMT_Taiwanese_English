@@ -12,6 +12,9 @@ spacy_en = spacy.load('en_core_web_sm')
 #     return text.split()
 
 def tokenize_en(text):
+    specialChars = ".,:;?![]\"()"
+    for specialChar in specialChars:
+        text = text.replace(specialChar, '')
     return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
 
 def tokenize_tw(text):
