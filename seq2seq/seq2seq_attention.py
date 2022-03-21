@@ -110,7 +110,7 @@ class Seq2Seq(nn.Module):
         outputs = torch.zeros(trg_len, batch_size, trg_vocab_size).to(self.device)
 
         #last hidden state of the encoder is used as the initial hidden state of the decoder
-        hidden, cell = self.encoder(src)
+        encoder_states, hidden, cell = self.encoder(src)
 
         #first input to the decoder is the <sos> tokens
         input = trg[0,:]
