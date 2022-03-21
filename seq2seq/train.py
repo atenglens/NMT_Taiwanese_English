@@ -9,7 +9,6 @@ from setup import get_data, get_iterators
 from seq2seq import Encoder, Decoder, Seq2Seq
 from training_functions import count_parameters, epoch_time
 from build_model import build_model
-from build_model_attention import build_model_attention
 
 SEED = 1234
 BATCH_SIZE = int(sys.argv[1])
@@ -29,10 +28,7 @@ train_iterator, valid_iterator, _, src_tw, trg_en = get_iterators(train_data, va
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print(f"Unique tokens in source (tw) vocabulary: {len(src_tw.vocab)}")
 print(f"Unique tokens in target (en) vocabulary: {len(trg_en.vocab)}")
-if WITH_ATTENTION:
-    model = build_model_attention(len(src_tw.vocab), len(trg_en.vocab))
-else:
-    model = build_model(len(src_tw.vocab), len(trg_en.vocab))
+model = build_model(len(src_tw.vocab), len(trg_en.vocab))
 
 # start training from checkpoint
 # model.load_state_dict(torch.load(f'seq2seq_model_epoch{CURRENT_EPOCH}.pt'))
