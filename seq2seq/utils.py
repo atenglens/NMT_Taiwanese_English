@@ -1,18 +1,17 @@
-import torch
-import spacy
+import torch, spacy, sys
 from torchtext.data.metrics import bleu_score
-import sys
+from tokenizer import tokenize_tw
 
-
-def translate_sentence(model, sentence, src_tw, trg_en, device, max_length=50):
+def translate_sentence(model, sentence, src_tw, trg_en, device, max_length=100):
     # Load src_tw tokenizer
     spacy_ger = spacy.load("de")
 
+    tokens = tokenize_tw(sentence)
     # Create tokens using spacy and everything in lower case (which is what our vocab is)
-    if type(sentence) == str:
-        tokens = [token.text.lower() for token in spacy_ger(sentence)]
-    else:
-        tokens = [token.lower() for token in sentence]
+    # if type(sentence) == str:
+    #     tokens = [token.text.lower() for token in spacy_ger(sentence)]
+    # else:
+    #     tokens = [token.lower() for token in sentence]
 
     # Add <SOS> and <EOS> in beginning and end respectively
     tokens.insert(0, src_tw.init_token)

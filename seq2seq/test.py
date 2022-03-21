@@ -2,12 +2,11 @@ import torch, math, sacrebleu, sys
 import torch.nn as nn
 from training_functions import evaluate
 from build_model import build_model
-from setup import get_data, get_orig_data, get_iterators
+from tokenizer import get_data, get_orig_data, get_iterators
 from random import randrange
+from utils import translate_sentence
 
 BATCH_SIZE = int(sys.argv[1])
-input_dim = 28
-output_dim = 37
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_data, valid_data, test_data = get_data()
 og_train_data, og_valid_data, og_test_data = get_orig_data()
@@ -32,26 +31,26 @@ preprocessed_target = ' '.join(example.trg)
 refs = example.trg
 print('TOKENIZED TARGET: ', preprocessed_target)
 
-src_tensor = src_tw.process([example.src]).to(device)
-trg_tensor = trg_en.process([example.trg]).to(device)
+# src_tensor = src_tw.process([example.src]).to(device)
+# trg_tensor = trg_en.process([example.trg]).to(device)
 # print(trg_tensor.shape)
 
-model.eval()
-with torch.no_grad():
-    outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
+# model.eval()
+# with torch.no_grad():
+#     outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
+sentence = ("I ê tshàn-lān tshin-tshiūnn kng; tuì I ê tshiú ū tshut kng-suàⁿ, tī hia I ê lîng-li̍k khǹg-leh.")
+predicted_translation = translate_sentence(model, sentence, src_tw, trg_en, device)
 
-# print(outputs.shape)
-
-output_idx = outputs[1:].squeeze(1).argmax(1)
+# output_idx = outputs[1:].squeeze(1).argmax(1)
 # itos: A list of token strings indexed by their numerical identifiers.
-predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
+# predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
 print('TRANSLATION: ', predicted_translation)
 
-preds = [trg_en.vocab.itos[idx] for idx in output_idx]
-preds = ['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']
-refs = [['i', 'seek', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']]
-bleu = sacrebleu.corpus_bleu(preds, refs)
-print("BLEU: ", bleu.score)
+# preds = [trg_en.vocab.itos[idx] for idx in output_idx]
+# preds = ['i', 'praise', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']
+# refs = [['i', 'seek', 'and', 'worship', 'Jesus', 'for', 'who', 'He', 'is']]
+# bleu = sacrebleu.corpus_bleu(preds, refs)
+# print("BLEU: ", bleu.score)
 
 # do not evaluate on test set until end of project
 # test_loss = evaluate(model, test_iterator, criterion)

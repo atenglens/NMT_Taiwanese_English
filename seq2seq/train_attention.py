@@ -5,7 +5,7 @@ from tqdm import tqdm
 from utils import translate_sentence, bleu, save_checkpoint, load_checkpoint
 from torch.utils.tensorboard import SummaryWriter  # to print to tensorboard
 from seq2seq_attention import Encoder, Decoder, Seq2Seq
-from setup import get_data, get_iterators
+from tokenizer import get_data, get_iterators
 from training_functions import count_parameters, epoch_time
 
 ### We're ready to define everything we need for training our Seq2Seq model ###
