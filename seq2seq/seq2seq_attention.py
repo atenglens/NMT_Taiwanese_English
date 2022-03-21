@@ -10,7 +10,7 @@ class Encoder(nn.Module):
 
         self.embedding = nn.Embedding(input_dim, emb_dim)
 
-        self.rnn = nn.LSTM(emb_dim, hid_dim, n_layers, dropout = dropout)
+        self.rnn = nn.LSTM(emb_dim, hid_dim, n_layers, dropout = dropout, bidirectional=True)
 
         self.fc_hidden = nn.Linear(hid_dim * 2, hid_dim)
         self.fc_cell = nn.Linear(hid_dim * 2, hid_dim)
