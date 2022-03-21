@@ -206,7 +206,3 @@ for epoch in range(N_EPOCHS):
 #         # Plot to tensorboard
 #         writer.add_scalar("Training loss", loss, global_step=step)
 #         step += 1
-
-# running on entire test data takes a while
-score = bleu(test_data[1:100], model, src_tw, trg_en, device)
-print(f"Bleu score {score * 100:.2f}")
