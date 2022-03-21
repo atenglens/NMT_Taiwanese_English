@@ -22,7 +22,7 @@ def tokenize_tw(text):
     Tokenizes Taiwanese text on spaces and returns reversed sequence.
     """
     # specialChars = "—[]()"
-    specialChars = ":;?![]\"()"
+    specialChars = ",:;?![]\"()"
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
     # text = text.replace('-', ' ')
