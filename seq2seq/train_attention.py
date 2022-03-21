@@ -31,10 +31,10 @@ print(f"Unique tokens in target (en) vocabulary: {len(trg_en.vocab)}")
 input_size_encoder = len(src_tw.vocab)
 input_size_decoder = len(trg_en.vocab)
 output_size = len(trg_en.vocab)
-encoder_embedding_size = 256 # 300
-decoder_embedding_size = 256 # 300
-hidden_size = 512 # 1024
-num_layers = 2
+encoder_embedding_size = 256
+decoder_embedding_size = 256
+hidden_size = 512
+num_layers = 1
 enc_dropout = 0.1
 dec_dropout = 0.1
 
