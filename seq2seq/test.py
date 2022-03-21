@@ -7,8 +7,10 @@ from random import randrange
 from tokenizer import tokenize_tw
 # from utils import translate_sentence
 
+BATCH_SIZE = int(sys.argv[1])
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_data, valid_data, test_data = get_data()
+_, _, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE)
 
 model = build_model(len(src_tw.vocab), len(trg_en.vocab))
 
