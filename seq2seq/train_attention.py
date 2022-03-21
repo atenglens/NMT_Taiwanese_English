@@ -6,21 +6,26 @@ from utils import translate_sentence, bleu, save_checkpoint, load_checkpoint
 from torch.utils.tensorboard import SummaryWriter  # to print to tensorboard
 from seq2seq_attention import Encoder, Decoder, Seq2Seq
 from setup import get_data, get_iterators
-
+from training_functions import count_parameters, epoch_time
 
 ### We're ready to define everything we need for training our Seq2Seq model ###
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 load_model = False
 save_model = True
+CURRENT_EPOCH = 0
 
 # Training hyperparameters
 # learning_rate = 3e-4
-batch_size = int(sys.argv[1])
-num_epochs = int(sys.argv[2])
+BATCH_SIZE = int(sys.argv[1])
+N_EPOCHS = int(sys.argv[2])
 
 train_data, valid_data, test_data = get_data()
 train_iterator, valid_iterator, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, batch_size)
 
+print(f"Unique tokens in source (tw) vocabulary: {len(src_tw.vocab)}")
+print(f"Unique tokens in target (en) vocabulary: {len(trg_en.vocab)}")
+# start training from checkpoint
+# model.load_state_dict(torch.load(f'seq2seq_model_epoch{CURRENT_EPOCH}.pt'))
 
 # Model hyperparameters
 input_size_encoder = len(src_tw.vocab)
@@ -51,6 +56,8 @@ decoder_net = Decoder(
 ).to(device)
 
 model = Seq2Seq(encoder_net, decoder_net, device).to(device)
+print(f'The model has {count_parameters(model):,} trainable parameters')
+
 optimizer = optim.Adam(model.parameters())
 
 PAD_IDX = trg_en.vocab.stoi[trg_en.pad_token] # ignore padding index when calculating loss
