@@ -47,7 +47,7 @@ decoder_net = Decoder(
     dec_dropout,
 ).to(device)
 
-model = Seq2Seq(encoder_net, decoder_net, device).to(device)
+model = Seq2Seq(encoder_net, decoder_net).to(device)
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
 pad_idx = trg_en.vocab.stoi["<pad>"]

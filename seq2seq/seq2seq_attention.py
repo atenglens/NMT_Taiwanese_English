@@ -83,17 +83,11 @@ class Decoder(nn.Module):
         return predictions, hidden, cell
 
 class Seq2Seq(nn.Module):
-    def __init__(self, encoder, decoder, device):
+    def __init__(self, encoder, decoder):
         super().__init__()
 
         self.encoder = encoder
         self.decoder = decoder
-        self.device = device
-
-        assert encoder.hid_dim == decoder.hid_dim, \
-            "Hidden dimensions of encoder and decoder must be equal!"
-        assert encoder.n_layers == decoder.n_layers, \
-            "Encoder and decoder must have equal number of layers!"
 
     def forward(self, src, trg, teacher_forcing_ratio = 0.5):
 
