@@ -5,9 +5,6 @@ from seq2seq_attention import Encoder, Decoder, Seq2Seq
 from setup import get_data, get_iterators
 
 
-train_data, valid_data, test_data = get_data()
-train_iterator, valid_iterator, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, BATCH_SIZE)
-
 ### We're ready to define everything we need for training our Seq2Seq model ###
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 load_model = False
@@ -17,6 +14,10 @@ save_model = True
 num_epochs = 100
 learning_rate = 3e-4
 batch_size = 32
+
+train_data, valid_data, test_data = get_data()
+train_iterator, valid_iterator, test_iterator, src_tw, trg_en = get_iterators(train_data, valid_data, test_data, batch_size)
+
 
 # Model hyperparameters
 input_size_encoder = len(src_tw.vocab)
