@@ -1,7 +1,7 @@
 file_en = open("data.en", "a")  # append mode
 file_zh = open("data.zh", "a")  # append mode
 
-file = open("Bi-Thesis.txt", "r")
+file = open("Bi-News.txt", "r")
 count = 0
 
 while True:
