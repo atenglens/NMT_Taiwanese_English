@@ -17,7 +17,6 @@ def tokenize_tw(text):
     specialChars = ",:;?![]\"()"
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
-    # no_hyphens = text.replace('-', ' ')
     return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
 
 def get_fields():
