@@ -12,7 +12,7 @@ spacy_en = spacy.load('en_core_web_sm')
 #     return text.split()
 
 def tokenize_en(text):
-    specialChars = ",:;?!"
+    specialChars = ",:;?![]\"()"
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
     return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
@@ -22,7 +22,7 @@ def tokenize_tw(text):
     Tokenizes Taiwanese text on spaces and returns reversed sequence.
     """
     # specialChars = "—[]()"
-    specialChars = ",:;?!"
+    specialChars = ":;?![]\"()"
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
     no_hyphens = text.replace('-', ' ')
