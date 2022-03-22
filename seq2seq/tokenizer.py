@@ -26,9 +26,9 @@ def tokenize_tw(text):
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
     text = text.replace('-', ' ')
-    isolate_periods = re.split(r'([.])', text)
-    strip = [x.lower().strip() for x in isolate_periods]
-    return strip[::-1]
+    # isolate_periods = re.split(r'([.,])', no_hyphens)
+    # strip = [x.strip() for x in isolate_periods]
+    return text.lower().split() # strip[::-1]
 
 # def tokenize_tw(text):
 #     """
