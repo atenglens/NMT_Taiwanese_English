@@ -56,7 +56,7 @@ file_pred = open("predicted_translation.txt", "a")  # append mode
 
 for i in range(len(og_valid_data.examples)):
     example = valid_data.examples[i]
-    preprocessed_target = ' '.join(example.trg)
+    preprocessed_target = ' '.join(example.trg) + '\n'
     file_ref.write(preprocessed_target)
 
     src_tensor = src_tw.process([example.src]).to(device)
@@ -73,7 +73,7 @@ for i in range(len(og_valid_data.examples)):
     for word in generation:
         if word == '<eos>': break
         predicted_translation.append(word)
-    predicted_target = ' '.join(predicted_translation)
+    predicted_target = ' '.join(predicted_translation) + '\n'
     file_pred.write(predicted_target)
 
 file_ref.close()
