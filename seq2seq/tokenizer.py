@@ -22,13 +22,13 @@ def tokenize_tw(text):
     Tokenizes Taiwanese text on spaces and returns reversed sequence.
     """
     # specialChars = "—[]()"
-    specialChars = ":;?![]\"()"
+    specialChars = ",:;?![]\"()"
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
     no_hyphens = text.replace('-', ' ')
-    isolate_periods = re.split(r'([.,])', no_hyphens)
-    strip = [x.strip() for x in isolate_periods]
-    return strip[::-1]
+    # isolate_periods = re.split(r'([.,])', no_hyphens)
+    # strip = [x.strip() for x in isolate_periods]
+    return [tok.text.lower() for tok in spacy_en.tokenizer(no_hyphens)]# strip[::-1]
 
 # def tokenize_tw(text):
 #     """
