@@ -96,6 +96,8 @@ CLIP = 1
 best_valid_loss = float('inf')
 best_train_loss = float('inf')
 
+losses_log = open("log.txt", "a")
+losses_log.truncate(0)
 for epoch in range(N_EPOCHS):
 
     start_time = time.time()
@@ -114,6 +116,9 @@ for epoch in range(N_EPOCHS):
         best_valid_loss = valid_loss
         torch.save(model.state_dict(), f'min_valid_epoch{epoch+1}.pt')
 
+    losses_log.write(f'{train_loss:.3f}\t{valid_loss:.3f}')
     print(f'Epoch: {epoch+1+CURRENT_EPOCH:02d} | Time: {epoch_mins}m {epoch_secs}s')
     print(f'\tTrain Loss: {train_loss:.3f}')
     print(f'\t Val. Loss: {valid_loss:.3f}')
+
+losses_log.close()
