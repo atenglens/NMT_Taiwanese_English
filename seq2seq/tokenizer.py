@@ -17,8 +17,8 @@ def tokenize_tw(text):
     specialChars = ",:;?![]\"()"
     for specialChar in specialChars:
         text = text.replace(specialChar, '')
-    no_hyphens = text.replace('-', ' ')
-    return [tok.text.lower() for tok in spacy_en.tokenizer(no_hyphens)]
+    # no_hyphens = text.replace('-', ' ')
+    return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
 
 def get_fields():
     src_tw = Field(tokenize = tokenize_tw, init_token = '<sos>', eos_token = '<eos>', lower = True)
