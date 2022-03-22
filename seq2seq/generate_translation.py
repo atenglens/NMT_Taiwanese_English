@@ -19,39 +19,68 @@ model = build_model(len(src_tw.vocab), len(trg_en.vocab))
 
 model.load_state_dict(torch.load('min_valid_epoch.pt'))
 
-example_idx = randrange(len(og_valid_data.examples))
-example = valid_data.examples[example_idx]
-og_example = og_valid_data.examples[example_idx]
-orig_source = ' '.join(og_example.src_orig)
-print('ORIG SOURCE: ', orig_source)
-orig_target = ' '.join(og_example.trg_orig)
-print('ORIG TARGET: ', orig_target)
-preprocessed_source = ' '.join(example.src[::-1])
-print('TOKENIZED SOURCE: ', preprocessed_source)
-preprocessed_target = ' '.join(example.trg)
-refs = example.trg
-print('TOKENIZED TARGET: ', preprocessed_target)
-# for i in range(len(og_valid_data.examples)):
-#     example = valid_data.examples[i]
-#     og_example = og_valid_data.examples[i]
+# example_idx = randrange(len(og_valid_data.examples))
+# example = valid_data.examples[example_idx]
+# og_example = og_valid_data.examples[example_idx]
+# orig_source = ' '.join(og_example.src_orig)
+# print('ORIG SOURCE: ', orig_source)
+# orig_target = ' '.join(og_example.trg_orig)
+# print('ORIG TARGET: ', orig_target)
+# preprocessed_source = ' '.join(example.src[::-1])
+# print('TOKENIZED SOURCE: ', preprocessed_source)
+# preprocessed_target = ' '.join(example.trg)
+# refs = example.trg
+# print('TOKENIZED TARGET: ', preprocessed_target)
+#
+# src_tensor = src_tw.process([example.src]).to(device)
+# trg_tensor = trg_en.process([example.trg]).to(device)
+#
+# model.eval()
+# with torch.no_grad():
+#     outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
+#
+# output_idx = outputs[1:].squeeze(1).argmax(1)
+# # itos: A list of token strings indexed by their numerical identifiers.
+# generation = [trg_en.vocab.itos[idx] for idx in output_idx]
+# predicted_translation = []
+# for word in generation:
+#     if word == '<eos>': break
+#     predicted_translation.append(word)
+# predicted_translation = ' '.join(predicted_translation)
+# print('TRANSLATION: ', ' '.join(predicted_translation))
 
-src_tensor = src_tw.process([example.src]).to(device)
-trg_tensor = trg_en.process([example.trg]).to(device)
-# print(trg_tensor.shape)
 
-model.eval()
-with torch.no_grad():
-    outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
+# write to translation files to use when calculating BLEU
+file_ref = open("target_translation.txt", "a")  # append mode
+file_pred = open("predicted_translation.txt", "a")  # append mode
 
-output_idx = outputs[1:].squeeze(1).argmax(1)
-# itos: A list of token strings indexed by their numerical identifiers.
-generation = [trg_en.vocab.itos[idx] for idx in output_idx]
-predicted_translation = []
-for word in generation:
-    if word == '<eos>': break
-    predicted_translation.append(word)
-# predicted_translation = ' '.join([trg_en.vocab.itos[idx] for idx in output_idx])
-print('TRANSLATION: ', ' '.join(predicted_translation))
+for i in range(len(og_valid_data.examples)):
+    example = valid_data.examples[i]
+    preprocessed_target = ' '.join(example.trg)
+    file_ref.write(preprocessed_target)
+
+    src_tensor = src_tw.process([example.src]).to(device)
+    trg_tensor = trg_en.process([example.trg]).to(device)
+
+    model.eval()
+    with torch.no_grad():
+        outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
+
+    output_idx = outputs[1:].squeeze(1).argmax(1)
+    # itos: A list of token strings indexed by their numerical identifiers.
+    generation = [trg_en.vocab.itos[idx] for idx in output_idx]
+    predicted_translation = []
+    for word in generation:
+        if word == '<eos>': break
+        predicted_translation.append(word)
+    predicted_target = ' '.join(predicted_translation)
+    file_pred.write(predicted_target)
+
+file_ref.close()
+file_pred.close()
+
+
+
 
 # do not evaluate on test set until end of project
 # test_loss = evaluate(model, test_iterator, criterion)
