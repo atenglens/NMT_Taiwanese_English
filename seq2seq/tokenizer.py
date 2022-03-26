@@ -1,5 +1,7 @@
 import torch, spacy, re
 from torchtext.legacy.data import Field, TabularDataset, BucketIterator
+from transformers import BartTokenizerFast
+from tokenizers import Tokenizer
 
 spacy_en = spacy.load('en_core_web_sm')
 # spacy_zh = spacy.load('zh_core_web_lg')
@@ -15,7 +17,9 @@ def tokenize_en(text):
 
 
 def tokenize_tw(text):
-    return [tok.text for tok in spacy_en.tokenizer(text)]
+    test_tokenizer_tw = Tokenizer.from_file("data_preprocessing/tokenizer_tw.json")
+    output = tokenizer_tw.encode(text)
+    return output.tokens # [tok.text for tok in spacy_en.tokenizer(text)]
 
 # def tokenize_tw(text):
 #     """
