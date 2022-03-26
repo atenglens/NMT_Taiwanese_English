@@ -12,11 +12,11 @@ spacy_en = spacy.load('en_core_web_sm')
 #     return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
 
 def tokenize_en(text):
-    return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
+    return [tok.text for tok in spacy_en.tokenizer(text)]
 
 
 def tokenize_tw(text):
-    return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
+    return [tok.text for tok in spacy_en.tokenizer(text)]
 
 # def tokenize_tw(text):
 #     """
