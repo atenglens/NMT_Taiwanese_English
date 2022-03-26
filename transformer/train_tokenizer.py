@@ -35,6 +35,6 @@ tokenizer_tw.save("data/tokenizer_tw.json")
 
 test_tokenizer_tw = Tokenizer.from_file("data/tokenizer_tw.json")
 
-output = tokenizer_tw.encode("Ū ê-hng, ū tsá-khí, sī tē-saⁿ ji̍t.")
+output = test_tokenizer_tw.encode("Ū ê-hng, ū tsá-khí, sī tē-saⁿ ji̍t.")
 
 print(output.tokens)
