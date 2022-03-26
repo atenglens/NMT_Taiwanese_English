@@ -1,6 +1,5 @@
 import torch, spacy, re
 from torchtext.legacy.data import Field, TabularDataset, BucketIterator
-from transformers import BartTokenizerFast
 from tokenizers import Tokenizer
 
 spacy_en = spacy.load('en_core_web_sm')
@@ -13,9 +12,7 @@ spacy_en = spacy.load('en_core_web_sm')
 #     return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
 
 def tokenize_en(text):
-    tokenizer_en = BartTokenizerFast.from_pretrained("facebook/bart-base")
-    output = tokenizer_en.encode(text)
-    return output.tokens # [tok.text for tok in spacy_en.tokenizer(text)]
+    return [tok.text for tok in spacy_en.tokenizer(text)]
 
 
 def tokenize_tw(text):
