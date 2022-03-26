@@ -25,7 +25,7 @@ tokenizer_en = BartTokenizerFast.from_pretrained("facebook/bart-base")
 # tokenizer_tw = Tokenizer(BPE(unk_token="[UNK]"))
 # trainer = BpeTrainer(special_tokens=["[UNK]", "[CLS]", "[SEP]", "[PAD]", "[MASK]"])
 tokenizer_tw = Tokenizer(Unigram())
-trainer = UnigramTrainer(special_tokens=["[UNK]", "[CLS]", "[SEP]", "[PAD]", "[MASK]"])
+trainer = UnigramTrainer(special_tokens=["[unk]", "[pad]", "[/s]"])
 
 pre_tokenizer_tw = Whitespace() # pre_tokenizers.Sequence([Whitespace(), CharDelimiterSplit('-')])
 tokenizer_tw.pre_tokenizer = pre_tokenizer_tw
