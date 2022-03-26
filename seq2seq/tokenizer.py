@@ -2,7 +2,7 @@ import torch, spacy, re
 from torchtext.legacy.data import Field, TabularDataset, BucketIterator
 
 spacy_en = spacy.load('en_core_web_sm')
-spacy_zh = spacy.load('zh_core_web_lg')
+# spacy_zh = spacy.load('zh_core_web_lg')
 
 # def tokenize_en(text):
 #     specialChars = ",:;?![]\"()"
@@ -15,7 +15,7 @@ def tokenize_en(text):
 
 
 def tokenize_tw(text):
-    return [tok.text for tok in spacy_zh.tokenizer(text)]
+    return [tok.text for tok in spacy_en.tokenizer(text)]
 
 # def tokenize_tw(text):
 #     """
