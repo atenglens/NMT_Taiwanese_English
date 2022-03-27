@@ -12,12 +12,8 @@ from tokenizers.pre_tokenizers import Whitespace, CharDelimiterSplit
 #
 # train = load_dataset(dataset, split='train')
 
-# generator that will yield batches of 1,000 texts to train tokenizer
-# def get_training_corpus():
-#     for i in range(0, len(dataset), 1000):
-#         yield dataset[i : i + 1000]["text"]
 
-
+# tokenizer_en = BartTokenizerFast.from_pretrained("facebook/bart-base")
 tokenizer_en = BartTokenizerFast.from_pretrained("facebook/bart-base")
 
 
