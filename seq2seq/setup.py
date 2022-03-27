@@ -1,4 +1,4 @@
-import random
+import random, csv
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -21,6 +21,6 @@ df = pd.DataFrame(raw_data, columns=['Tailo', 'English'])
 train, test = train_test_split(df, test_size=0.2)
 valid, test = train_test_split(test, test_size=0.5)
 
-train.to_csv('train.csv', index=False)
-valid.to_csv('valid.csv', index=False)
-test.to_csv('test.csv', index=False)
+train.to_csv('train.csv', quoting=csv.QUOTE_ALL, index=False)
+valid.to_csv('valid.csv', quoting=csv.QUOTE_ALL, index=False)
+test.to_csv('test.csv', quoting=csv.QUOTE_ALL, index=False)
