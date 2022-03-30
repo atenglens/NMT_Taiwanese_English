@@ -6,9 +6,9 @@ from training_functions import init_weights
 def build_model(input_dim, output_dim):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     INPUT_DIM, OUTPUT_DIM = input_dim, output_dim
-    ENC_EMB_DIM = 256
-    DEC_EMB_DIM = 256
-    HID_DIM = 512
+    ENC_EMB_DIM = 512 # 256
+    DEC_EMB_DIM = 512 # 256
+    HID_DIM = 1024 # 512
     N_LAYERS = 6 # 2
     ENC_DROPOUT = 0.1
     DEC_DROPOUT = 0.1
