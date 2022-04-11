@@ -54,8 +54,8 @@ model.load_state_dict(torch.load('min_valid_epoch20.pt'))
 file_ref = open("target_translation.txt", "a")  # append mode
 file_pred = open("predicted_translation.txt", "a")  # append mode
 
-for i in range(len(valid_data.examples)):
-    example = valid_data.examples[i]
+for i in range(len(test_data.examples)):
+    example = test_data.examples[i]
     preprocessed_target = ' '.join(example.trg) + '\n'
     file_ref.write(preprocessed_target)
 
