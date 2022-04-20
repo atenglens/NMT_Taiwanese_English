@@ -3,7 +3,7 @@ https://github.com/huggingface/transformers
 
 - Code added is denoted by the comment block:
 ###### @atenglens ######
-[code]
+
 ########################
 
 Added translation generation for validation dataset.
