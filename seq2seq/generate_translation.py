@@ -67,6 +67,7 @@ for i in range(len(test_data.examples)):
         outputs = model(src_tensor, trg_tensor, teacher_forcing_ratio=0)
 
     output_idx = outputs[1:].squeeze(1).argmax(1)
+    
     # itos: A list of token strings indexed by their numerical identifiers.
     generation = [trg_en.vocab.itos[idx] for idx in output_idx]
     predicted_translation = []
@@ -78,11 +79,3 @@ for i in range(len(test_data.examples)):
 
 file_ref.close()
 file_pred.close()
-
-
-
-
-# do not evaluate on test set until end of project
-# test_loss = evaluate(model, test_iterator, criterion)
-#
-# print(f'Test Loss: {test_loss:.3f}')
