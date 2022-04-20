@@ -1,3 +1,7 @@
+###### @atenglens ######
+# Adapted from https://blog.machinetranslation.io/compute-bleu-score/
+########################
+
 import sacrebleu
 from sacremoses import MosesDetokenizer
 

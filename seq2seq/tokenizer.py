@@ -3,8 +3,8 @@ from torchtext.legacy.data import Field, TabularDataset, BucketIterator
 from tokenizers import Tokenizer
 
 spacy_en = spacy.load('en_core_web_sm')
-# spacy_zh = spacy.load('zh_core_web_lg')
 
+# test alternative tokenization method
 # def tokenize_en(text):
 #     specialChars = ",:;?![]\"()"
 #     for specialChar in specialChars:
@@ -17,15 +17,6 @@ def tokenize_en(text):
 
 def tokenize_tw(text):
     return [tok.text for tok in spacy_en.tokenizer(text)]
-
-# def tokenize_tw(text):
-#     """
-#     Tokenizes Taiwanese text on spaces and returns reversed sequence.
-#     """
-#     specialChars = ",:;?![]\"()"
-#     for specialChar in specialChars:
-#         text = text.replace(specialChar, '')
-#     return [tok.text.lower() for tok in spacy_en.tokenizer(text)]
 
 def get_fields():
     src_tw = Field(tokenize = tokenize_tw, init_token = '<sos>', eos_token = '<eos>', lower = True)

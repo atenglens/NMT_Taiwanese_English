@@ -4,23 +4,14 @@ from tokenizer import tokenize_tw
 
 def translate_sentence(model, sentence, src_tw, trg_en, device, max_length=100):
     tokens = tokenize_tw(sentence)
-    # Create tokens using spacy and everything in lower case (which is what our vocab is)
-    # if type(sentence) == str:
-    #     tokens = [token.text.lower() for token in spacy_ger(sentence)]
-    # else:
-    #     tokens = [token.lower() for token in sentence]
 
-    # Add <SOS> and <EOS> in beginning and end respectively
+    # Add start and end tokens
     tokens.insert(0, src_tw.init_token)
     tokens.append(src_tw.eos_token)
 
-    # Go through each src_tw token and convert to an index
     text_to_indices = [src_tw.vocab.stoi[token] for token in tokens]
-
-    # Convert to Tensor
     sentence_tensor = torch.LongTensor(text_to_indices).unsqueeze(1).to(device)
 
-    # Build encoder hidden, cell state
     with torch.no_grad():
         outputs_encoder, hiddens, cells = model.encoder(sentence_tensor)
 
@@ -37,7 +28,7 @@ def translate_sentence(model, sentence, src_tw, trg_en, device, max_length=100):
 
         outputs.append(best_guess)
 
-        # Model predicts it's the end of the sentence
+        # stop predicting when end tag is predicted
         if output.argmax(1).item() == trg_en.vocab.stoi["<eos>"]:
             break
 

@@ -10,9 +10,6 @@ np.random.seed(SEED)
 tailo_txt = open('parallel_corpus/bible.tw', encoding='utf-8').read().split('\n')
 eng_txt = open('parallel_corpus/bible.en', encoding='utf-8').read().split('\n')
 
-# tailo_txt = open('data_preprocessing/pretrain_chinese/data/data.zh', encoding='utf-8').read().split('\n')
-# eng_txt = open('data_preprocessing/pretrain_chinese/data/data.en', encoding='utf-8').read().split('\n')
-
 raw_data = {'Tailo': [line for line in tailo_txt],
             'English': [line for line in eng_txt]}
 
