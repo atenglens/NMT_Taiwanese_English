@@ -8,3 +8,5 @@ https://github.com/huggingface/transformers
 
 Added translation generation for validation dataset.
 Added print statement to display # of trainable parameters.
+
+# Dataset: https://huggingface.co/datasets/atenglens/taiwanese_english_translation
