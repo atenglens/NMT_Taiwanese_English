@@ -9,3 +9,5 @@ Instructions for viewing Taiwanese and English translations on website:
 2. Select 台羅 UNICODE
 3. In the dropdowns, select the desired Bible book and chapter.
 4. Click 閱讀
+
+### How to run Seq2Seq
